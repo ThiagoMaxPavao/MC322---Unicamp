@@ -6,4 +6,4 @@
 
 ## Notebook 2 sobre Empréstimos e TAD (opcional)
 
-Não feito
+Não soube fazer
