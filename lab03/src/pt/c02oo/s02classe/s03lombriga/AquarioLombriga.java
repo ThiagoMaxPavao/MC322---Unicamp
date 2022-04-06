@@ -7,14 +7,14 @@ public class AquarioLombriga {
 	AquarioLombriga(int tamAquario, int tamLombriga, int pos) {
 		this.tamAquario = tamAquario < tamLombriga ? tamLombriga : tamAquario; // tamAquario vira o tamanho da lombriga caso ele seja dado menor do que o tamanho dela
 		this.tamLombriga = tamLombriga;
-		this.pos = pos + tamLombriga -1 <= this.tamAquario ? pos : 1; // posição da cabeça -> seta para um caso corpo fique para fora
+		this.pos = pos + tamLombriga -1 <= this.tamAquario ? pos : 1; // posição da cabeça -> seta para 1 caso o corpo fique para fora
 		this.dir = 'E';
 	}
 	
 	void crescer() {
 		if(dir == 'E' && pos + tamLombriga <= tamAquario)
 			tamLombriga++;
-		else if(dir == 'D' && pos - tamLombriga > 1)
+		else if(dir == 'D' && pos - (tamLombriga - 1)  > 1)
 			tamLombriga++;
 	}
 	
@@ -47,9 +47,9 @@ public class AquarioLombriga {
 				if(i < pos)
 					aquario += "#";
 				else if(i == pos)
-					aquario += "@";
+					aquario += "O";
 				else if(i < pos + tamLombriga)
-					aquario += "o";
+					aquario += "@";
 				else
 					aquario += "#";
 			}
@@ -59,9 +59,9 @@ public class AquarioLombriga {
 				if(i <= pos - tamLombriga)
 					aquario += "#";
 				else if(i == pos)
-					aquario += "@";
+					aquario += "O";
 				else if(i < pos)
-					aquario += "o";
+					aquario += "@";
 				else
 					aquario += "#";
 			}
