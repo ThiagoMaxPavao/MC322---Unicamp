@@ -11,12 +11,13 @@ public class AppRestaUm {
       
       String commands[] = tk.retrieveCommands();
       
-      for (int l = 0; l < commands.length; l++)
-         System.out.println(commands[l]);
-      
       Tabuleiro t = new Tabuleiro();
-            
       tk.writeBoard("Tabuleiro inicial", t.apresenta());
+      
+      for (int l = 0; l < commands.length; l++) {
+    	  t.moverPorComando(commands[l]);
+    	  tk.writeBoard(commands[l], t.apresenta());
+      }
       
       tk.stop();
    }
