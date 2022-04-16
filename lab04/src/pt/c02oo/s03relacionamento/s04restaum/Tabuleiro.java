@@ -1,7 +1,8 @@
 package pt.c02oo.s03relacionamento.s04restaum;
 
 public class Tabuleiro {
-	private Peca tabuleiro[][] = new Peca[7][7];
+	private Peca tabuleiro[][] = new Peca[7][7]; // privado, portanto nenhuma peca tem acesso direto a matriz de Pecas.
+												 // mesmo tendo o ponteiro do tabuleiro
 	
 	public Tabuleiro() {
 		for(int x = 0; x < 7; x++)
@@ -62,7 +63,7 @@ public class Tabuleiro {
 		moverPeca(xi, yi, xf, yf);
 	}
 	
-	public void matarPeca(int x, int y) {
+	private void matarPeca(int x, int y) {
 		tabuleiro[x][y] = null;
 	}
 }
