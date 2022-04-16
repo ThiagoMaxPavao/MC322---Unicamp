@@ -1,7 +1,7 @@
 package pt.c02oo.s03relacionamento.s04restaum;
 
 public class Tabuleiro {
-	Peca tabuleiro[][] = new Peca[7][7];
+	private Peca tabuleiro[][] = new Peca[7][7];
 	
 	public Tabuleiro() {
 		for(int x = 0; x < 7; x++)
@@ -9,11 +9,11 @@ public class Tabuleiro {
 				tabuleiro[x][y] = null;
 				if(x == 3 && y == 3) continue;
 				if((x >= 2 && x <= 4) || (y >= 2 && y <= 4))
-					tabuleiro[x][y] = new Peca(x, y);
+					tabuleiro[x][y] = new Peca(x, y, this);
 			}
 	}
 	
-	char[][] apresenta() {
+	public char[][] apresenta() {
 		char matrizChar[][] = new char[7][7];
 		for(int y = 0; y < 7; y++)
 			for(int x = 0; x < 7; x++)
@@ -26,27 +26,26 @@ public class Tabuleiro {
 		return matrizChar;
 	}
 	
-	boolean temPeca(int x, int y) {
+	public boolean temPeca(int x, int y) {
 		return tabuleiro[x][y] != null;
 	}
 	
-	boolean dentroDoTabuleiro(int x, int y) {
+	private boolean dentroDoTabuleiro(int x, int y) {
 		if(x < 0 || y < 0 || x > 6 || y > 6) return false;
 		if((x >= 2 && x <= 4) || (y >= 2 && y <= 4)) return true;
 		return false;
 	}
 	
-	boolean validaMovimento(int xi, int yi, int xf, int yf) {
+	private boolean validaMovimento(int xi, int yi, int xf, int yf) {
 		if(!temPeca(xi,yi)) return false;
 		if( temPeca(xf,yf)) return false;
 		if(!dentroDoTabuleiro(xf, yf)) return false;
-		if(!temPeca((xi + xf)/2, (yi + yf)/2)) return false; // sem peça na posição pulada
 		return true;
 	}
 	
-	void moverPeca(int xi, int yi, int xf, int yf) {
-		if(!validaMovimento(xi, yi, xf, yf)) return;			// Validação geral
-		if(!tabuleiro[xi][yi].validaMovimento(xf, yf)) return;  // Validação especifica da peça
+	private void moverPeca(int xi, int yi, int xf, int yf) {
+		if(!validaMovimento(xi, yi, xf, yf)) return;			// Validacao geral
+		if(!tabuleiro[xi][yi].validaMovimento(xf, yf)) return;  // Validacao especifica da peca
 		
 		tabuleiro[xi][yi].mover(xf, yf);
 		matarPeca((xi + xf)/2, (yi + yf)/2);
@@ -54,7 +53,7 @@ public class Tabuleiro {
 		tabuleiro[xi][yi] = null;
 	}
 	
-	void moverPorComando(String comando) {
+	public void moverPorComando(String comando) {
 		int a = 'a';
 		int xi = comando.charAt(0) - a;
 		int yi = Character.getNumericValue(comando.charAt(1)) - 1;
@@ -63,7 +62,7 @@ public class Tabuleiro {
 		moverPeca(xi, yi, xf, yf);
 	}
 	
-	void matarPeca(int x, int y) {
+	public void matarPeca(int x, int y) {
 		tabuleiro[x][y] = null;
 	}
 }
